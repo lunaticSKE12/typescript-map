@@ -25,12 +25,18 @@ export class CustomMap {
 
   addMarker(mappable: Mappable): void {
     // mappable.locationdd
-    new google.maps.Marker({
+    const maker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+    maker.addListener('click', () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: 'Hi there!'
+      });
+      infoWindow.open(this.googleMap, maker);
     });
   }
 

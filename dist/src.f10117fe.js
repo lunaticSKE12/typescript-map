@@ -85180,13 +85180,21 @@ function () {
   }
 
   CustomMap.prototype.addMarker = function (mappable) {
-    // mappable.locationdd
-    new google.maps.Marker({
+    var _this = this; // mappable.locationdd
+
+
+    var maker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+    maker.addListener('click', function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: 'Hi there!'
+      });
+      infoWindow.open(_this.googleMap, maker);
     });
   };
 
